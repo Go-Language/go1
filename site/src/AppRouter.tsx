@@ -26,7 +26,7 @@ const TerminalPage = lazy(() => import("./pages/TerminalPage/TerminalPage"))
 const WorkspacesPage = lazy(() => import("./pages/WorkspacesPage/WorkspacesPage"))
 const CreateWorkspacePage = lazy(() => import("./pages/CreateWorkspacePage/CreateWorkspacePage"))
 
-export const AppRouter: FC<React.PropsWithChildren<unknown>> = () => (
+export const AppRouter: FC = () => (
   <Suspense fallback={<></>}>
     <Routes>
       <Route
