@@ -45,7 +45,7 @@ export const Resources: FC<React.PropsWithChildren<ResourcesProps>> = ({
   return (
     <div aria-label={Language.resources} className={styles.wrapper}>
       {getResourcesError ? (
-        { getResourcesError }
+        getResourcesError.message
       ) : (
         <TableContainer className={styles.tableContainer}>
           <Table>

@@ -29,9 +29,10 @@ export interface StackProps {
   direction?: Direction
   spacing?: number
   alignItems?: CSSProperties["alignItems"]
+  children: React.ReactNode
 }
 
-export const Stack: FC<React.PropsWithChildren<StackProps>> = ({
+export const Stack: FC<StackProps> = ({
   children,
   className,
   direction = "column",
