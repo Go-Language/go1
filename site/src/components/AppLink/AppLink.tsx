@@ -17,7 +17,7 @@ export interface AppLinkProps {
   appIcon?: TypesGen.WorkspaceApp["icon"]
 }
 
-export const AppLink: FC<React.PropsWithChildren<AppLinkProps>> = ({
+export const AppLink: FC<PropsWithChildren<AppLinkProps>> = ({
   userName,
   workspaceName,
   appName,
