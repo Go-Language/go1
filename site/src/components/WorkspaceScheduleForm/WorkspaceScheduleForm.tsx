@@ -179,7 +179,7 @@ export const defaultWorkspaceSchedule = (
   ttl,
 })
 
-export const WorkspaceScheduleForm: FC<WorkspaceScheduleFormProps> = ({
+export const WorkspaceScheduleForm: FC<React.PropsWithChildren<WorkspaceScheduleFormProps>> = ({
   submitScheduleError,
   initialValues = defaultWorkspaceSchedule(),
   isLoading,

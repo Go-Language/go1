@@ -32,7 +32,7 @@ interface LocationState {
   isRedirect: boolean
 }
 
-export const LoginPage: React.FC = () => {
+export const LoginPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const styles = useStyles()
   const location = useLocation()
   const xServices = useContext(XServiceContext)

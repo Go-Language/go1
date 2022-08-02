@@ -144,7 +144,7 @@ export const workspaceToInitialValues = (
   }
 }
 
-export const WorkspaceSchedulePage: React.FC = () => {
+export const WorkspaceSchedulePage: React.FC<React.PropsWithChildren<unknown>> = () => {
   const { username: usernameQueryParam, workspace: workspaceQueryParam } = useParams()
   const navigate = useNavigate()
   const username = firstOrItem(usernameQueryParam, null)

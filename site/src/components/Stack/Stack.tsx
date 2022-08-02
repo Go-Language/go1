@@ -31,7 +31,7 @@ export interface StackProps {
   alignItems?: CSSProperties["alignItems"]
 }
 
-export const Stack: FC<StackProps> = ({
+export const Stack: FC<React.PropsWithChildren<StackProps>> = ({
   children,
   className,
   direction = "column",

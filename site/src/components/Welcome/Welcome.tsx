@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography"
 import { FC } from "react"
 import { CoderIcon } from "../Icons/CoderIcon"
 
-export const Welcome: FC = () => {
+export const Welcome: FC<React.PropsWithChildren<unknown>> = () => {
   const styles = useStyles()
 
   return (
