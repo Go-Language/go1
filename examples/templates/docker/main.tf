@@ -94,7 +94,6 @@ resource "coder_app" "code-server" {
   icon     = "/icon/code.svg"
 }
 
-
 variable "docker_image" {
   description = "Which Docker image would you like to use for your workspace?"
   # The codercom/enterprise-* images are only built for amd64
@@ -108,16 +107,15 @@ variable "docker_image" {
 }
 
 resource "docker_volume" "home_volume" {
-  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}-home"
+  name = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.id}-home"
 }
 
 resource "docker_container" "workspace" {
   count = data.coder_workspace.me.start_count
   image = var.docker_image
-  # Uses lower() to avoid Docker restriction on container names.
-  name = "coder-${data.coder_workspace.me.owner}-${lower(data.coder_workspace.me.name)}"
+  name  = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.id}"
   # Hostname makes the shell more user friendly: coder@my-workspace:~$
-  hostname = lower(data.coder_workspace.me.name)
+  hostname = data.coder_workspace.me.name
   dns      = ["1.1.1.1"]
   # Use the docker gateway if the access URL is 127.0.0.1
   command = [
