@@ -14,7 +14,6 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"github.com/lib/pq"
 	"github.com/moby/moby/pkg/namesgenerator"
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/xerrors"
@@ -513,10 +512,8 @@ func (api *API) patchWorkspace(rw http.ResponseWriter, r *http.Request) {
 			})
 			return
 		}
-		// Check if we triggered the one-unique-name-per-owner
-		// constraint.
-		var pqErr *pq.Error
-		if errors.As(err, &pqErr) && pqErr.Code.Name() == "unique_violation" {
+		// Check if the name was already in use.
+		if database.IsUniqueViolation(err, database.UniqueConstraintWorkspacesOwnerIDLowerIdx) {
 			httpapi.Write(rw, http.StatusConflict, codersdk.Response{
 				Message: fmt.Sprintf("Workspace %q already exists.", req.Name),
 				Validations: []codersdk.ValidationError{{
@@ -526,7 +523,6 @@ func (api *API) patchWorkspace(rw http.ResponseWriter, r *http.Request) {
 			})
 			return
 		}
-
 		httpapi.Write(rw, http.StatusInternalServerError, codersdk.Response{
 			Message: "Internal error updating workspace.",
 			Detail:  err.Error(),
